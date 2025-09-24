@@ -39,10 +39,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       forwardToPopup(message, sendResponse);
       return true;
     case 'automationComplete':
-		console.log('Automation completed:');
-		// Handle completion logic here
-		sendResponse({ success: true });
-		break;
+      // Forward completion messages from content script to popup
+      forwardToPopup(message, sendResponse);
+      return true;
     default:
       console.log('Unknown message action:', message.action);
       sendResponse({ success: false, error: 'Unknown action' });
@@ -167,7 +166,7 @@ chrome.action.onClicked.addListener((tab) => {
 });
 
 // Clean up when tab is closed or navigated
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
   if (changeInfo.status === 'loading' && changeInfo.url) {
     // Page is navigating - stop any running automation
     chrome.tabs.sendMessage(tabId, { action: 'stopAutomation' })
