@@ -1,5 +1,7 @@
 # Auto Click Assistant
 
+Download here: https://chromewebstore.google.com/detail/pandnmeeoflfbfijailiabjoodkhbpbj?utm_source=item-share-cb
+
 A lightweight Chrome extension for automating repetitive clicking tasks on web pages.
 
 ## Features
